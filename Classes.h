@@ -243,7 +243,17 @@ public:
     bool is_Admin();
     void getPersonalData() const;
     template<class Archive>
-    void serialize(Archive& archive){ archive(usernameHash, passwordHash, fullName, address, phoneNumber, role); }
+    void serialize(Archive& archive)
+    {
+        if (role == USER)
+        {
+            archive(usernameHash, passwordHash, fullName, address, phoneNumber, results, role);
+        }
+        else
+        {
+            archive(usernameHash, passwordHash, fullName, address, phoneNumber, role);
+        }
+    }
 
 };
 

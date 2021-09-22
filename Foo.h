@@ -354,15 +354,18 @@ void adminMenu() {
         cout << "N -> Выйти" << endl;
         cout << "---------------------------" << endl;
         cout << "Действие: "; getline(cin, input);
-        if (input == "1") {
+        if (input == "1") 
+        {
             
-            while (true) {
+            while (true) 
+            {
                 system("cls");
                 string sectionsList;
                 cout << "   -Управление разделами-" << endl;
                 cout << "---------------------------" << endl;
                 sectionsList += " Список разделов: \n";
-                for (Section section : sections) {
+                for (Section section : sections) 
+                {
                     sectionsList += " " + section.getName() + "\tid: " + to_string(section.getId()) + "\n";
                 }
                 cout << sectionsList;
@@ -375,7 +378,8 @@ void adminMenu() {
                 cout << "Действие: ";
                 input.clear();
                 getline(cin, input);
-                if (input == "1") {
+                if (input == "1") 
+                {
                     cout << "   -Добавление нового раздела-" << endl;
                     cout << "---------------------------------" << endl;
                     string name = getInput("Название нового раздела: ");
@@ -392,7 +396,8 @@ void adminMenu() {
                     Section newSection(id, name);
                     sections.push_back(newSection);
                 }
-                else if (input == "2") {
+                else if (input == "2") 
+                {
                     cout << "Введите id удаляемого раздела: " << endl;
                     int id;
                     cin >> id;
@@ -404,15 +409,18 @@ void adminMenu() {
                         continue;
                     }
                     int index = 0;
-                    for (Section section : sections) {
-                        if (section.getId() == id) {
+                    for (Section section : sections) 
+                    {
+                        if (section.getId() == id) 
+                        {
                             sections.erase(sections.begin() + index);
                             break;
                         }
                         index++;
                     }
                 }
-                else if (input == "3") {
+                else if (input == "3") 
+                {
                     cout << "Введите id раздела: ";
                     int id;
                     cin >> id;
@@ -423,21 +431,26 @@ void adminMenu() {
                         cin.clear();
                         continue;
                     }
-                    for (Section& section : sections) {
-                        if (section.getId() == id) {
+                    for (Section& section : sections) 
+                    {
+                        if (section.getId() == id) 
+                        {
                             sectionMenu(&section);
                         }
                     }
                 }
-                else {
+                else 
+                {
                     break;
                 }
             }
         }
-        else if (input == "2") {
+        else if (input == "2") 
+        {
             usersControlMenu();
         }
-        else if (input == "3") {
+        else if (input == "3") 
+        {
             save();
         }
         else
@@ -445,18 +458,22 @@ void adminMenu() {
     }
 }
 
-Result testRun(Test test) {
+Result testRun(Test test)
+{
     int correctAnswers = 0;
     system("cls");
-    for (Question question : test.getQuestions()) {
+    for (Question question : test.getQuestions()) 
+    {
         string possibleAnswersList;
-        for (Answer answer : question.getPossibleAnswers()) {
+        for (Answer answer : question.getPossibleAnswers()) 
+        {
             system("cls");
             possibleAnswersList += " id " + to_string(answer.getId()) + "\t"+ answer.getTxt() + "\n";
         }
         string input = getInput(question.getTitle()+ "\n------------------------------" + "\nВозможные варианты ответов:\n" + possibleAnswersList + "В качестве ответа, введите (id)\n------------------------------\n id: ");
         for (Answer answer : question.getPossibleAnswers()) {
-            if (answer.checkIsCorrectAnswer() && to_string(answer.getId()) == input) {
+            if (answer.checkIsCorrectAnswer() && to_string(answer.getId()) == input) 
+            {
                 correctAnswers++;
             }
         }
@@ -468,46 +485,58 @@ Result testRun(Test test) {
 
 
 
-void userMenu(User* currentUser) {
-    while (true) {
+void userMenu(User* currentUser) 
+{
+    load();
+    while (true) 
+    {
         system("cls");
         cout << "   -Программа тестирования-" << endl;
         cout << "------------------------------" << endl;
         string input = getInput("1 -> Пройти тестирование\n2 -> Мои результаты\n3 -> Персональные данные\nN -> Выход\n------------------------------\nДействие: ");
-        if (input == "1") {
+        if (input == "1") 
+        {
             system("cls");
             string sectionsList;
             sectionsList += " Список разделов:\n";
             cout << "\t-Тестирование-" << endl;
             cout << "------------------------------" << endl;
-            for (Section section : sections) {
-                sectionsList += " " + section.getName() + "\tid: " + to_string(section.getId()) + "\n";
-            }
-            input = getInput("Выберите раздел (id)\n" + sectionsList +"------------------------------\n id: ");
-            for (Section section : sections) {
-                if (to_string(section.getId()) == input) {
+            for (Section section : sections)
+                {
+                    sectionsList += " " + section.getName() + "\tid: " + to_string(section.getId()) + "\n";
+                }
+            
+            for (Section section : sections) 
+            {
+                system("cls");
+                string input2 = getInput("Выберите раздел (id)\n" + sectionsList + " N -> Выход\n------------------------------\n id: ");
+                bool flag = false;
+                if (to_string(section.getId()) == input2) 
+                {
                     string testsList = " Список доступных тестов:\n";
-                    for (auto test : section.getTests()) {
+                    for (Test test : section.getTests())
+                    {
                         testsList += " " + test.getName() + " id: " + to_string(test.getId()) + "\n";
                     }
-                    input = getInput("------------------------------\nВыберите тест (id)\n------------------------------\n" + testsList + "\n------------------------------\n id: ");
-                    bool flag = false;
-                    for (Test test : section.getTests()) {
-                        
-                        if (to_string(test.getId()) == input && !flag) 
+                    input2 = getInput("------------------------------\nВыберите тест (id)\n------------------------------\n" + testsList + "------------------------------\n id: ");
+                    for (Test test : section.getTests()) 
+                    {
+                        if (to_string(test.getId()) == input2) 
                         {
                             if (!currentUser->testCompleStatus(test.getId())) 
                             {
                                 currentUser->appendResult(testRun(test));
-
+                                
                             }
                             else 
                             {
-                                getInput("Вы уже проходили данный тест\nВведите любой символ для выхода\n");
-                                flag == true;
+                                cout << "Вы уже проходили данный тест!" << endl;
+                                system("pause");
+                             
                             }
                             
                         }
+                        
                     }
 
                 }
@@ -516,10 +545,12 @@ void userMenu(User* currentUser) {
         }
         else if (input == "2") {
             string resultsList;
-            for (Result result : currentUser->getResults()) {
-                resultsList += " " + result.getTestName() + ", результат " + to_string(result.getResult()) + "%\n";
+            for (Result result : currentUser->getResults()) 
+            {
+                resultsList += " -" + result.getTestName() + "-\t|результат| = " + to_string(result.getResult()) + "%\n";
             }
-            getInput(resultsList + "Введите любой символ для выхода\n");
+            cout << resultsList << "------------------------------" << endl;
+            system("pause");
         }
         else if(input == "3")
         {
@@ -533,21 +564,27 @@ void userMenu(User* currentUser) {
     save();
 }
 
-void loginMenu() {
-    while (true) {
+void loginMenu() 
+{
+    while (true) 
+    {
         system("cls");
         cout << "   |-Вход-|" << endl;
         cout << "--------------" << endl;
         string username = getInput("Логин : ");
         string password = getInput("Пароль: ");
         bool flag = true;
-        for (User& user : users) {
-            if (user.check_Username(username) && user.check_Password(password)) {
-                if (user.is_Admin()) {
+        for (User& user : users) 
+        {
+            if (user.check_Username(username) && user.check_Password(password)) 
+            {
+                if (user.is_Admin()) 
+                {
                     adminMenu();
                     flag = false;
                 }
-                else {
+                else 
+                {
                     userMenu(&user);
                     flag = false;
                 }
