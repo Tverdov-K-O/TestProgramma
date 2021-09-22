@@ -48,30 +48,39 @@ void save() {
 // функция для получения ввода пользователя
 string getInput(string message) {
     string input;
-    do
+    bool flag = true;
+    while (input.length() == 0) 
     {
-        system("cls");
-        cout << message;
+        if(flag)
+            cout << message;
         getline(cin, input);
-    } while (input.length() == 0);
+        flag = false;
+    }
     return input;
 }
+
+
+    //system("cls");
+    
 
 // консольное меню управления вопросом
 void questionMenu(Question* question) {
     while (true) {
+        system("cls");
         string answersList = " Список возможных ответов:\n";
         for (Answer answer : question->getPossibleAnswers()) {
-            answersList += " " + answer.getTxt() + " id: " + to_string(answer.getId());
+            answersList += "id: " + to_string(answer.getId()) + " " + answer.getTxt();
             if (answer.checkIsCorrectAnswer()) {
                 answersList += " [ПРАВИЛЬНЫЙ ОТВЕТ]";
             }
             answersList += "\n";
         }
-        string input = getInput(answersList + "1. Добавить новый ответ\n2. Удалить ответ\nN. Выход\n");
+        cout << "    -Управление ответом-" << endl;
+        cout << "----------------------------" << endl;
+        string input = getInput(answersList + "----------------------------\n1 -> Добавить новый ответ\n2 -> Удалить ответ\nN -> Выход\n----------------------------\nДействие: ");
         if (input == "1") {
-            string txt = getInput("Введите новый ответ\n");
-            cout << "Введите id нового ответа" << endl;
+            string txt = getInput("Введите новый ответ: ");
+            cout << "Введите id нового ответа: ";
             int id;
             cin >> id;
             cin.ignore();
@@ -81,7 +90,7 @@ void questionMenu(Question* question) {
                 cin.clear();
                 continue;
             }
-            input = getInput("Это правильный ответ?\n1. Да!\nN. Нет!\n");
+            input = getInput("Это правильный ответ?\n1 -> Да!\n2 -> Нет!\n");
             bool flag;
             if (input == "1") {
                 flag = true;
@@ -93,7 +102,7 @@ void questionMenu(Question* question) {
             question->appendAnswer(answer);
         }
         else if (input == "2") {
-            cout << "Введите id удаляемого ответа" << endl;
+            cout << "Введите id удаляемого ответа: ";
             int id;
             cin >> id;
             cin.ignore();
@@ -115,14 +124,18 @@ void questionMenu(Question* question) {
 // консольное меню управления тестом 
 Test testMenu(Test test) {
     while (true) {
+        system("cls");
         string questionsList = " Список вопросов:\n";
         for (Question question : test.getQuestions()) {
-            questionsList += " " + question.getTitle() + " id: " + to_string(question.getId()) + "\n";
+            questionsList += " id:" + to_string(question.getId())+ " " + question.getTitle() + "\n";
         }
-        string input = getInput(questionsList + "1. Добавить новый вопрос\n2. Удалить вопрос\n3. Управление вопросами\nN. Выход\n");
+        cout << "     -Управление тестом-" << endl;
+        cout << "      " << test.getName() << endl;
+        cout << "----------------------------" << endl;
+        string input = getInput(questionsList + "----------------------------\n1 -> Добавить новый вопрос\n2 -> Удалить вопрос\n3 -> Управление вопросами\nN -> Выход\n----------------------------\nДействие: ");
         if (input == "1") {
-            string name = getInput("Введите новый вопрос\n");
-            cout << "Введите id нового вопроса" << endl;
+            string name = getInput("Введите новый вопрос: ");
+            cout << "Введите id нового вопроса: ";
             int id;
             cin >> id;
             cin.ignore();
@@ -136,7 +149,7 @@ Test testMenu(Test test) {
             test.appendQuestion(question);
         }
         else if (input == "2") {
-            cout << "Введите id удаляемого вопроса" << endl;
+            cout << "Введите id удаляемого вопроса: ";
             int id;
             cin >> id;
             cin.ignore();
@@ -149,7 +162,7 @@ Test testMenu(Test test) {
             test.delQuestion(id);
         }
         else if (input == "3") {
-            cout << "Введите id вопроса" << endl;
+            cout << "Введите id вопроса: ";
             int id;
             cin >> id;
             cin.ignore();
@@ -173,17 +186,19 @@ Test testMenu(Test test) {
 
 void sectionMenu(Section* section) {
     while (true) {
+        system("cls");
         string testsList = " Список тестов:\n";
         for (Test test : section->getTests()) {
-            testsList += " " + test.getName() + " id: " + to_string(test.getId()) + "\n";
+            testsList += " " + test.getName() + "\tid: " + to_string(test.getId()) + "\n";
         }
-        string input = getInput(testsList + "1. Добавить новый тест\n2. Удалить тест\n3. Управление тестом\nN. Выход\n");
+        cout << "    -Управление разделом-" << endl;
+        cout << "           "<<section->getName() << endl;
+        cout << "-------------------------------" << endl;
+        string input = getInput(testsList + "-------------------------------\n1 -> Добавить новый тест\n2 -> Удалить тест\n3 -> Управление тестом\nN -> Выход\n-------------------------------\nДействие: ");
         if (input == "1") {
-            string name = getInput("Введите название нового теста\n");
-            cout << "Введите id нового теста" << endl;
-            int id;
-            cin >> id;
-            cin.ignore();
+            string name = getInput("Введите название нового теста: ");
+            cout << "Введите id нового теста: " << endl;
+            int id; cin >> id; cin.ignore();
             if (cin.fail())
             {
                 cout << "ОШИБКА -- ВЫ ВВЕЛИ НЕ ЧИСЛО" << endl;
@@ -195,10 +210,8 @@ void sectionMenu(Section* section) {
 
         }
         else if (input == "2") {
-            cout << "Введите id удаляемого теста" << endl;
-            int id;
-            cin >> id;
-            cin.ignore();
+            cout << "Введите id удаляемого теста: ";
+            int id; cin >> id;cin.ignore();
             if (cin.fail())
             {
                 cout << "ОШИБКА -- ВЫ ВВЕЛИ НЕ ЧИСЛО" << endl;
@@ -209,7 +222,7 @@ void sectionMenu(Section* section) {
 
         }
         else if (input == "3") {
-            cout << "Введите id теста" << endl;
+            cout << "Введите id теста: " << endl;
             int id;
             cin >> id;
             cin.ignore();
@@ -239,21 +252,30 @@ void sectionMenu(Section* section) {
 
 void registrationMenu() {
     while (true) {
-        string username = getInput("Введите логин: \n");
+        system("cls");
+        cout << "   |-Регистрация-| " << endl;
+        cout << "---------------------" << endl;
+        string username = getInput("Логин: ");
         for (User user : users) {
             if (user.check_Username(username)) {
                 getInput("Данный логин уже занят,попробуйте другой\nВведите любой символ для выхода\n");
                 return;
             }
         }
-        string password = getInput("Введите пароль: \n");
-        string fullName = getInput("Введите Ф.И.О: \n");
-        string address = getInput("Введите адрес проживания: \n");
-        string phoneNumber = getInput("Введите номер телефона в формате +380..\n");
+        string password = getInput("Пароль: ");
+        string fullName = getInput("Ф.И.О: ");
+        string address = getInput("Aдрес проживания: ");
+        string phoneNumber = getInput("Номер телефона в формате +38 ");
         Role role;
 
         while (true) {
-            string input = getInput("1. Обычный пользователь\n2. Администратор\n");
+            system("cls");
+            cout << "           |-Роль-|" << endl;
+            cout << "------------------------------" << endl;
+            cout << "1 -> Обычный пользователь" << endl;
+            cout << "2 -> Администратор" << endl;
+            cout << "------------------------------" << endl;
+            string input = getInput("Выбор: ");
             if (input == "1") {
                 role = USER;
                 break;
@@ -273,22 +295,22 @@ void registrationMenu() {
 
 void usersControlMenu() {
     while (true) {
+        system("cls");
         string usersList;
-        usersList += " Список пользователей:\n";
+        usersList += "    -Список пользователей-\n-----------------------------------------\n";
         int index = 0;
         for (User user : users) {
             usersList += " " + to_string(index) + ". " + user.getFullName() + "\n";
             index++;
         }
-        string input = getInput(usersList + "1. Добавить нового пользователя\n2. Удалить пользователя\n3. Результаты тестов всех пользователей\nN. Выход\n");
+        string input = getInput(usersList + "-----------------------------------------\n1 -> Добавить нового пользователя\n2 -> Удалить пользователя\n3 -> Результаты тестов всех пользователей\nN -> Выход\n-----------------------------------------\nДействие: ");
         if (input == "1") {
             registrationMenu();
         }
         else if (input == "2") {
             int index;
-            cout << "Введите порядковый номер пользователя в списке" << endl;
+            cout << "Введите номер пользователя: ";
             cin >> index;
-            index;
             cin.ignore();
             if (cin.fail() || index < 0 || index >= users.size())
             {
@@ -296,7 +318,7 @@ void usersControlMenu() {
                 continue;
             }
             else {
-                users.erase(users.begin());
+                users.erase(users.begin() + index);
                 save();
                 continue;
             }
@@ -320,19 +342,44 @@ void usersControlMenu() {
 }
 
 void adminMenu() {
+    
     while (true) {
-        string input = getInput("1. Управление разделами\n2. Пользователи\n3. Сохранить\nN. Выйти\n");
+        system("cls");
+        string input;
+        cout << "   -Меню Администратора-" << endl;
+        cout << "---------------------------" << endl;
+        cout << "1 -> Управление разделами" << endl;
+        cout << "2 -> Пользователи" << endl;
+        cout << "3 -> Сохранить" << endl;
+        cout << "N -> Выйти" << endl;
+        cout << "---------------------------" << endl;
+        cout << "Действие: "; getline(cin, input);
         if (input == "1") {
+            
             while (true) {
+                system("cls");
                 string sectionsList;
+                cout << "   -Управление разделами-" << endl;
+                cout << "---------------------------" << endl;
                 sectionsList += " Список разделов: \n";
                 for (Section section : sections) {
-                    sectionsList += " " + section.getName() + " id: " + to_string(section.getId()) + "\n";
+                    sectionsList += " " + section.getName() + "\tid: " + to_string(section.getId()) + "\n";
                 }
-                string input = getInput(sectionsList + "1. Добавить новый раздел\n2. Удалить раздел\n3. Управление разделом\nN. Выход\n");
+                cout << sectionsList;
+                cout << "---------------------------" << endl;
+                cout << "1 -> Добавить новый раздел "<< endl;
+                cout << "2 -> Удалить раздел" << endl;
+                cout << "3 -> Управление разделом" << endl;
+                cout << "N -> Выход" << endl;
+                cout << "---------------------------" << endl;
+                cout << "Действие: ";
+                input.clear();
+                getline(cin, input);
                 if (input == "1") {
-                    string name = getInput("Введите название нового раздела\n");
-                    cout << "Введите id нового раздела" << endl;
+                    cout << "   -Добавление нового раздела-" << endl;
+                    cout << "---------------------------------" << endl;
+                    string name = getInput("Название нового раздела: ");
+                    cout << "ID нового раздела: ";
                     int id;
                     cin >> id;
                     cin.ignore();
@@ -346,7 +393,7 @@ void adminMenu() {
                     sections.push_back(newSection);
                 }
                 else if (input == "2") {
-                    cout << "Введите id удаляемого раздела" << endl;
+                    cout << "Введите id удаляемого раздела: " << endl;
                     int id;
                     cin >> id;
                     cin.ignore();
@@ -366,7 +413,7 @@ void adminMenu() {
                     }
                 }
                 else if (input == "3") {
-                    cout << "Введите id раздела" << endl;
+                    cout << "Введите id раздела: ";
                     int id;
                     cin >> id;
                     cin.ignore();
@@ -400,12 +447,14 @@ void adminMenu() {
 
 Result testRun(Test test) {
     int correctAnswers = 0;
+    system("cls");
     for (Question question : test.getQuestions()) {
         string possibleAnswersList;
         for (Answer answer : question.getPossibleAnswers()) {
-            possibleAnswersList += " " + answer.getTxt() + " id " + to_string(answer.getId()) + "\n";
+            system("cls");
+            possibleAnswersList += " id " + to_string(answer.getId()) + "\t"+ answer.getTxt() + "\n";
         }
-        string input = getInput(question.getTitle() + "\nВозможные варианты ответов:\n" + possibleAnswersList + "В качестве ответа, введите id\n");
+        string input = getInput(question.getTitle()+ "\n------------------------------" + "\nВозможные варианты ответов:\n" + possibleAnswersList + "В качестве ответа, введите (id)\n------------------------------\n id: ");
         for (Answer answer : question.getPossibleAnswers()) {
             if (answer.checkIsCorrectAnswer() && to_string(answer.getId()) == input) {
                 correctAnswers++;
@@ -421,31 +470,43 @@ Result testRun(Test test) {
 
 void userMenu(User* currentUser) {
     while (true) {
-
-        string input = getInput("1. Пройти тестирование\n2. Мои результаты\n");
+        system("cls");
+        cout << "   -Программа тестирования-" << endl;
+        cout << "------------------------------" << endl;
+        string input = getInput("1 -> Пройти тестирование\n2 -> Мои результаты\n3 -> Персональные данные\nN -> Выход\n------------------------------\nДействие: ");
         if (input == "1") {
+            system("cls");
             string sectionsList;
             sectionsList += " Список разделов:\n";
+            cout << "\t-Тестирование-" << endl;
+            cout << "------------------------------" << endl;
             for (Section section : sections) {
-                sectionsList += " " + section.getName() + " id: " + to_string(section.getId()) + "\n";
+                sectionsList += " " + section.getName() + "\tid: " + to_string(section.getId()) + "\n";
             }
-            input = getInput("Выберите раздел (id)\n" + sectionsList);
+            input = getInput("Выберите раздел (id)\n" + sectionsList +"------------------------------\n id: ");
             for (Section section : sections) {
                 if (to_string(section.getId()) == input) {
                     string testsList = " Список доступных тестов:\n";
-                    for (Test test : section.getTests()) {
+                    for (auto test : section.getTests()) {
                         testsList += " " + test.getName() + " id: " + to_string(test.getId()) + "\n";
                     }
-                    input = getInput("Выберите тест (id)\n" + testsList);
+                    input = getInput("------------------------------\nВыберите тест (id)\n------------------------------\n" + testsList + "\n------------------------------\n id: ");
+                    bool flag = false;
                     for (Test test : section.getTests()) {
-                        if (to_string(test.getId()) == input) {
-                            if (!currentUser->testCompleStatus(test.getId())) {
+                        
+                        if (to_string(test.getId()) == input && !flag) 
+                        {
+                            if (!currentUser->testCompleStatus(test.getId())) 
+                            {
                                 currentUser->appendResult(testRun(test));
 
                             }
-                            else {
+                            else 
+                            {
                                 getInput("Вы уже проходили данный тест\nВведите любой символ для выхода\n");
+                                flag == true;
                             }
+                            
                         }
                     }
 
@@ -456,29 +517,47 @@ void userMenu(User* currentUser) {
         else if (input == "2") {
             string resultsList;
             for (Result result : currentUser->getResults()) {
-                resultsList += " " + result.getTestName() + ", результат " + to_string(result.getResult() * 100) + "%\n";// нужно доделать результат тестирования 
+                resultsList += " " + result.getTestName() + ", результат " + to_string(result.getResult()) + "%\n";
             }
             getInput(resultsList + "Введите любой символ для выхода\n");
         }
-
+        else if(input == "3")
+        {
+            currentUser->getPersonalData();
+        }
+        else 
+        {
+            break;
+        }
     }
+    save();
 }
 
 void loginMenu() {
     while (true) {
-        cout << "Введите логин" << endl;
-        string username = getInput("Введите логин\n");
-        cout << "Введите пароль" << endl;
-        string password = getInput("Введите пароль\n");
+        system("cls");
+        cout << "   |-Вход-|" << endl;
+        cout << "--------------" << endl;
+        string username = getInput("Логин : ");
+        string password = getInput("Пароль: ");
+        bool flag = true;
         for (User& user : users) {
             if (user.check_Username(username) && user.check_Password(password)) {
                 if (user.is_Admin()) {
                     adminMenu();
+                    flag = false;
                 }
                 else {
                     userMenu(&user);
+                    flag = false;
                 }
             }
+        }
+        if (flag) 
+        {
+        cout << "Неверный логин или пароль!" << endl;
+        cout << "Возможно учетной записи не существует!" << endl;
+        system("pause");
         }
         return;
     }

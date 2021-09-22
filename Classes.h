@@ -1,8 +1,9 @@
 #pragma once
 using namespace std;
 
-// класс представляющий собою один из возможных ответов на вопрос(Question)
 
+
+// класс представляющий собою один из возможных ответов на вопрос(Question)
 class Answer {
 
     int id;
@@ -18,11 +19,8 @@ public:
     }
 
     int getId() { return id; }
-
     string getTxt() { return txt; }
-
     bool checkIsCorrectAnswer() { return isTrueAnswer; }
-
     template<class Archive>
     void serialize(Archive& archive) { archive(id, txt, isTrueAnswer); }
 
@@ -187,7 +185,7 @@ public:
 
     string getTestName() { return testName; }
     int getTestId() { return testId; }
-    double getResult() { return correctAnswersCount / answersCount; }
+    float getResult() { return (correctAnswersCount *100) / answersCount; }
     template<class Archive>
     void serialize(Archive& archive) { archive(testId, testName, answersCount, correctAnswersCount); }
 
@@ -243,6 +241,7 @@ public:
     bool check_Username(string username);
     bool check_Password(string password);
     bool is_Admin();
+    void getPersonalData() const;
     template<class Archive>
     void serialize(Archive& archive){ archive(usernameHash, passwordHash, fullName, address, phoneNumber, role); }
 
@@ -294,5 +293,16 @@ inline bool User::is_Admin()
     {
         return false;
     }
+}
+
+inline void User::getPersonalData() const
+{
+    system("cls");
+    cout << "   -Ваши персональные данные-   " << endl;
+    cout << "--------------------------------" << endl;
+    cout << "ФИО    : " << fullName << endl;
+    cout << "Адрес  : " << address << endl;
+    cout << "Телефон: " << phoneNumber << endl;
+    system("pause");
 }
 
