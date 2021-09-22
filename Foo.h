@@ -189,7 +189,7 @@ void sectionMenu(Section* section) {
         system("cls");
         string testsList = " Список тестов:\n";
         for (Test test : section->getTests()) {
-            testsList += " " + test.getName() + "\tid: " + to_string(test.getId()) + "\n";
+            testsList += " id: " + to_string(test.getId())+ "\t" + test.getName() +"\n";
         }
         cout << "    -Управление разделом-" << endl;
         cout << "           "<<section->getName() << endl;
@@ -366,7 +366,7 @@ void adminMenu() {
                 sectionsList += " Список разделов: \n";
                 for (Section section : sections) 
                 {
-                    sectionsList += " " + section.getName() + "\tid: " + to_string(section.getId()) + "\n";
+                    sectionsList += " id: " + to_string(section.getId())+ "\t" + section.getName() + "\n";
                 }
                 cout << sectionsList;
                 cout << "---------------------------" << endl;
@@ -503,30 +503,27 @@ void userMenu(User* currentUser)
             cout << "------------------------------" << endl;
             for (Section section : sections)
                 {
-                    sectionsList += " " + section.getName() + "\tid: " + to_string(section.getId()) + "\n";
+                    sectionsList += " id: " + to_string(section.getId()) + "\t" + section.getName() + "\n";
                 }
-            
+            system("cls");
+            input = getInput("Выберите раздел (id)\n" + sectionsList + " N -> Выход\n------------------------------\n id: ");
             for (Section section : sections) 
             {
-                system("cls");
-                string input2 = getInput("Выберите раздел (id)\n" + sectionsList + " N -> Выход\n------------------------------\n id: ");
-                bool flag = false;
-                if (to_string(section.getId()) == input2) 
+                if (to_string(section.getId()) == input) 
                 {
                     string testsList = " Список доступных тестов:\n";
                     for (Test test : section.getTests())
                     {
                         testsList += " " + test.getName() + " id: " + to_string(test.getId()) + "\n";
                     }
-                    input2 = getInput("------------------------------\nВыберите тест (id)\n------------------------------\n" + testsList + "------------------------------\n id: ");
+                    input = getInput("------------------------------\nВыберите тест (id)\n------------------------------\n" + testsList + "------------------------------\n id: ");
                     for (Test test : section.getTests()) 
                     {
-                        if (to_string(test.getId()) == input2) 
+                        if (to_string(test.getId()) == input) 
                         {
                             if (!currentUser->testCompleStatus(test.getId())) 
                             {
                                 currentUser->appendResult(testRun(test));
-                                
                             }
                             else 
                             {
