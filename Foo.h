@@ -1,4 +1,4 @@
-#pragma once
+п»ї#pragma once
 
 using namespace std;
 
@@ -7,7 +7,7 @@ using namespace std;
 vector<Section> sections;
 vector<User> users;
 
-// загружает данные из файлов
+// Р·Р°РіСЂСѓР¶Р°РµС‚ РґР°РЅРЅС‹Рµ РёР· С„Р°Р№Р»РѕРІ
 void load() {
     {
         {
@@ -29,7 +29,7 @@ void load() {
     }
 }
 
-// сохраняет данные в файлы
+// СЃРѕС…СЂР°РЅСЏРµС‚ РґР°РЅРЅС‹Рµ РІ С„Р°Р№Р»С‹
 void save() {
     {
         {
@@ -45,7 +45,7 @@ void save() {
     }
 }
 
-// функция для получения ввода пользователя
+// С„СѓРЅРєС†РёСЏ РґР»СЏ РїРѕР»СѓС‡РµРЅРёСЏ РІРІРѕРґР° РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ
 string getInput(string message) {
     string input;
     bool flag = true;
@@ -63,34 +63,34 @@ string getInput(string message) {
     //system("cls");
     
 
-// консольное меню управления вопросом
+// РєРѕРЅСЃРѕР»СЊРЅРѕРµ РјРµРЅСЋ СѓРїСЂР°РІР»РµРЅРёСЏ РІРѕРїСЂРѕСЃРѕРј
 void questionMenu(Question* question) {
     while (true) {
         system("cls");
-        string answersList = " Список возможных ответов:\n";
+        string answersList = " РЎРїРёСЃРѕРє РІРѕР·РјРѕР¶РЅС‹С… РѕС‚РІРµС‚РѕРІ:\n";
         for (Answer answer : question->getPossibleAnswers()) {
             answersList += "id: " + to_string(answer.getId()) + " " + answer.getTxt();
             if (answer.checkIsCorrectAnswer()) {
-                answersList += " [ПРАВИЛЬНЫЙ ОТВЕТ]";
+                answersList += " [РџР РђР’РР›Р¬РќР«Р™ РћРўР’Р•Рў]";
             }
             answersList += "\n";
         }
-        cout << "    -Управление ответом-" << endl;
+        cout << "    -РЈРїСЂР°РІР»РµРЅРёРµ РѕС‚РІРµС‚РѕРј-" << endl;
         cout << "----------------------------" << endl;
-        string input = getInput(answersList + "----------------------------\n1 -> Добавить новый ответ\n2 -> Удалить ответ\nN -> Выход\n----------------------------\nДействие: ");
+        string input = getInput(answersList + "----------------------------\n1 -> Р”РѕР±Р°РІРёС‚СЊ РЅРѕРІС‹Р№ РѕС‚РІРµС‚\n2 -> РЈРґР°Р»РёС‚СЊ РѕС‚РІРµС‚\nN -> Р’С‹С…РѕРґ\n----------------------------\nР”РµР№СЃС‚РІРёРµ: ");
         if (input == "1") {
-            string txt = getInput("Введите новый ответ: ");
-            cout << "Введите id нового ответа: ";
+            string txt = getInput("Р’РІРµРґРёС‚Рµ РЅРѕРІС‹Р№ РѕС‚РІРµС‚: ");
+            cout << "Р’РІРµРґРёС‚Рµ id РЅРѕРІРѕРіРѕ РѕС‚РІРµС‚Р°: ";
             int id;
             cin >> id;
             cin.ignore();
             if (cin.fail())
             {
-                cout << "ОШИБКА -- ВЫ ВВЕЛИ НЕ ЧИСЛО" << endl;
+                cout << "РћРЁРР‘РљРђ -- Р’Р« Р’Р’Р•Р›Р РќР• Р§РРЎР›Рћ" << endl;
                 cin.clear();
                 continue;
             }
-            input = getInput("Это правильный ответ?\n1 -> Да!\n2 -> Нет!\n");
+            input = getInput("Р­С‚Рѕ РїСЂР°РІРёР»СЊРЅС‹Р№ РѕС‚РІРµС‚?\n1 -> Р”Р°!\n2 -> РќРµС‚!\n");
             bool flag;
             if (input == "1") {
                 flag = true;
@@ -102,13 +102,13 @@ void questionMenu(Question* question) {
             question->appendAnswer(answer);
         }
         else if (input == "2") {
-            cout << "Введите id удаляемого ответа: ";
+            cout << "Р’РІРµРґРёС‚Рµ id СѓРґР°Р»СЏРµРјРѕРіРѕ РѕС‚РІРµС‚Р°: ";
             int id;
             cin >> id;
             cin.ignore();
             if (cin.fail())
             {
-                cout << "ОШИБКА -- ВЫ ВВЕЛИ НЕ ЧИСЛО" << endl;
+                cout << "РћРЁРР‘РљРђ -- Р’Р« Р’Р’Р•Р›Р РќР• Р§РРЎР›Рћ" << endl;
                 cin.clear();
                 continue;
             }
@@ -121,27 +121,27 @@ void questionMenu(Question* question) {
     }
 }
 
-// консольное меню управления тестом 
+// РєРѕРЅСЃРѕР»СЊРЅРѕРµ РјРµРЅСЋ СѓРїСЂР°РІР»РµРЅРёСЏ С‚РµСЃС‚РѕРј 
 Test testMenu(Test test) {
     while (true) {
         system("cls");
-        string questionsList = " Список вопросов:\n";
+        string questionsList = " РЎРїРёСЃРѕРє РІРѕРїСЂРѕСЃРѕРІ:\n";
         for (Question question : test.getQuestions()) {
             questionsList += " id:" + to_string(question.getId())+ " " + question.getTitle() + "\n";
         }
-        cout << "     -Управление тестом-" << endl;
+        cout << "     -РЈРїСЂР°РІР»РµРЅРёРµ С‚РµСЃС‚РѕРј-" << endl;
         cout << "      " << test.getName() << endl;
         cout << "----------------------------" << endl;
-        string input = getInput(questionsList + "----------------------------\n1 -> Добавить новый вопрос\n2 -> Удалить вопрос\n3 -> Управление вопросами\nN -> Выход\n----------------------------\nДействие: ");
+        string input = getInput(questionsList + "----------------------------\n1 -> Р”РѕР±Р°РІРёС‚СЊ РЅРѕРІС‹Р№ РІРѕРїСЂРѕСЃ\n2 -> РЈРґР°Р»РёС‚СЊ РІРѕРїСЂРѕСЃ\n3 -> РЈРїСЂР°РІР»РµРЅРёРµ РІРѕРїСЂРѕСЃР°РјРё\nN -> Р’С‹С…РѕРґ\n----------------------------\nР”РµР№СЃС‚РІРёРµ: ");
         if (input == "1") {
-            string name = getInput("Введите новый вопрос: ");
-            cout << "Введите id нового вопроса: ";
+            string name = getInput("Р’РІРµРґРёС‚Рµ РЅРѕРІС‹Р№ РІРѕРїСЂРѕСЃ: ");
+            cout << "Р’РІРµРґРёС‚Рµ id РЅРѕРІРѕРіРѕ РІРѕРїСЂРѕСЃР°: ";
             int id;
             cin >> id;
             cin.ignore();
             if (cin.fail())
             {
-                cout << "ОШИБКА -- ВЫ ВВЕЛИ НЕ ЧИСЛО" << endl;
+                cout << "РћРЁРР‘РљРђ -- Р’Р« Р’Р’Р•Р›Р РќР• Р§РРЎР›Рћ" << endl;
                 cin.clear();
                 continue;
             }
@@ -149,26 +149,26 @@ Test testMenu(Test test) {
             test.appendQuestion(question);
         }
         else if (input == "2") {
-            cout << "Введите id удаляемого вопроса: ";
+            cout << "Р’РІРµРґРёС‚Рµ id СѓРґР°Р»СЏРµРјРѕРіРѕ РІРѕРїСЂРѕСЃР°: ";
             int id;
             cin >> id;
             cin.ignore();
             if (cin.fail())
             {
-                cout << "ОШИБКА -- ВЫ ВВЕЛИ НЕ ЧИСЛО" << endl;
+                cout << "РћРЁРР‘РљРђ -- Р’Р« Р’Р’Р•Р›Р РќР• Р§РРЎР›Рћ" << endl;
                 cin.clear();
                 continue;
             }
             test.delQuestion(id);
         }
         else if (input == "3") {
-            cout << "Введите id вопроса: ";
+            cout << "Р’РІРµРґРёС‚Рµ id РІРѕРїСЂРѕСЃР°: ";
             int id;
             cin >> id;
             cin.ignore();
             if (cin.fail())
             {
-                cout << "ОШИБКА -- ВЫ ВВЕЛИ НЕ ЧИСЛО" << endl;
+                cout << "РћРЁРР‘РљРђ -- Р’Р« Р’Р’Р•Р›Р РќР• Р§РРЎР›Рћ" << endl;
                 cin.clear();
                 continue;
             }
@@ -187,21 +187,21 @@ Test testMenu(Test test) {
 void sectionMenu(Section* section) {
     while (true) {
         system("cls");
-        string testsList = " Список тестов:\n";
+        string testsList = " РЎРїРёСЃРѕРє С‚РµСЃС‚РѕРІ:\n";
         for (Test test : section->getTests()) {
             testsList += " " + test.getName() + "\tid: " + to_string(test.getId()) + "\n";
         }
-        cout << "    -Управление разделом-" << endl;
+        cout << "    -РЈРїСЂР°РІР»РµРЅРёРµ СЂР°Р·РґРµР»РѕРј-" << endl;
         cout << "           "<<section->getName() << endl;
         cout << "-------------------------------" << endl;
-        string input = getInput(testsList + "-------------------------------\n1 -> Добавить новый тест\n2 -> Удалить тест\n3 -> Управление тестом\nN -> Выход\n-------------------------------\nДействие: ");
+        string input = getInput(testsList + "-------------------------------\n1 -> Р”РѕР±Р°РІРёС‚СЊ РЅРѕРІС‹Р№ С‚РµСЃС‚\n2 -> РЈРґР°Р»РёС‚СЊ С‚РµСЃС‚\n3 -> РЈРїСЂР°РІР»РµРЅРёРµ С‚РµСЃС‚РѕРј\nN -> Р’С‹С…РѕРґ\n-------------------------------\nР”РµР№СЃС‚РІРёРµ: ");
         if (input == "1") {
-            string name = getInput("Введите название нового теста: ");
-            cout << "Введите id нового теста: " << endl;
+            string name = getInput("Р’РІРµРґРёС‚Рµ РЅР°Р·РІР°РЅРёРµ РЅРѕРІРѕРіРѕ С‚РµСЃС‚Р°: ");
+            cout << "Р’РІРµРґРёС‚Рµ id РЅРѕРІРѕРіРѕ С‚РµСЃС‚Р°: " << endl;
             int id; cin >> id; cin.ignore();
             if (cin.fail())
             {
-                cout << "ОШИБКА -- ВЫ ВВЕЛИ НЕ ЧИСЛО" << endl;
+                cout << "РћРЁРР‘РљРђ -- Р’Р« Р’Р’Р•Р›Р РќР• Р§РРЎР›Рћ" << endl;
                 cin.clear();
                 continue;
             }
@@ -210,11 +210,11 @@ void sectionMenu(Section* section) {
 
         }
         else if (input == "2") {
-            cout << "Введите id удаляемого теста: ";
+            cout << "Р’РІРµРґРёС‚Рµ id СѓРґР°Р»СЏРµРјРѕРіРѕ С‚РµСЃС‚Р°: ";
             int id; cin >> id;cin.ignore();
             if (cin.fail())
             {
-                cout << "ОШИБКА -- ВЫ ВВЕЛИ НЕ ЧИСЛО" << endl;
+                cout << "РћРЁРР‘РљРђ -- Р’Р« Р’Р’Р•Р›Р РќР• Р§РРЎР›Рћ" << endl;
                 cin.clear();
                 continue;
             }
@@ -222,13 +222,13 @@ void sectionMenu(Section* section) {
 
         }
         else if (input == "3") {
-            cout << "Введите id теста: " << endl;
+            cout << "Р’РІРµРґРёС‚Рµ id С‚РµСЃС‚Р°: " << endl;
             int id;
             cin >> id;
             cin.ignore();
             if (cin.fail())
             {
-                cout << "ОШИБКА -- ВЫ ВВЕЛИ НЕ ЧИСЛО" << endl;
+                cout << "РћРЁРР‘РљРђ -- Р’Р« Р’Р’Р•Р›Р РќР• Р§РРЎР›Рћ" << endl;
                 cin.clear();
                 continue;
             }
@@ -253,29 +253,29 @@ void sectionMenu(Section* section) {
 void registrationMenu() {
     while (true) {
         system("cls");
-        cout << "   |-Регистрация-| " << endl;
+        cout << "   |-Р РµРіРёСЃС‚СЂР°С†РёСЏ-| " << endl;
         cout << "---------------------" << endl;
-        string username = getInput("Логин: ");
+        string username = getInput("Р›РѕРіРёРЅ: ");
         for (User user : users) {
             if (user.check_Username(username)) {
-                getInput("Данный логин уже занят,попробуйте другой\nВведите любой символ для выхода\n");
+                getInput("Р”Р°РЅРЅС‹Р№ Р»РѕРіРёРЅ СѓР¶Рµ Р·Р°РЅСЏС‚,РїРѕРїСЂРѕР±СѓР№С‚Рµ РґСЂСѓРіРѕР№\nР’РІРµРґРёС‚Рµ Р»СЋР±РѕР№ СЃРёРјРІРѕР» РґР»СЏ РІС‹С…РѕРґР°\n");
                 return;
             }
         }
-        string password = getInput("Пароль: ");
-        string fullName = getInput("Ф.И.О: ");
-        string address = getInput("Aдрес проживания: ");
-        string phoneNumber = getInput("Номер телефона в формате +38 ");
+        string password = getInput("РџР°СЂРѕР»СЊ: ");
+        string fullName = getInput("Р¤.Р.Рћ: ");
+        string address = getInput("AРґСЂРµСЃ РїСЂРѕР¶РёРІР°РЅРёСЏ: ");
+        string phoneNumber = getInput("РќРѕРјРµСЂ С‚РµР»РµС„РѕРЅР° РІ С„РѕСЂРјР°С‚Рµ +38 ");
         Role role;
 
         while (true) {
             system("cls");
-            cout << "           |-Роль-|" << endl;
+            cout << "           |-Р РѕР»СЊ-|" << endl;
             cout << "------------------------------" << endl;
-            cout << "1 -> Обычный пользователь" << endl;
-            cout << "2 -> Администратор" << endl;
+            cout << "1 -> РћР±С‹С‡РЅС‹Р№ РїРѕР»СЊР·РѕРІР°С‚РµР»СЊ" << endl;
+            cout << "2 -> РђРґРјРёРЅРёСЃС‚СЂР°С‚РѕСЂ" << endl;
             cout << "------------------------------" << endl;
-            string input = getInput("Выбор: ");
+            string input = getInput("Р’С‹Р±РѕСЂ: ");
             if (input == "1") {
                 role = USER;
                 break;
@@ -297,19 +297,19 @@ void usersControlMenu() {
     while (true) {
         system("cls");
         string usersList;
-        usersList += "    -Список пользователей-\n-----------------------------------------\n";
+        usersList += "    -РЎРїРёСЃРѕРє РїРѕР»СЊР·РѕРІР°С‚РµР»РµР№-\n-----------------------------------------\n";
         int index = 0;
         for (User user : users) {
             usersList += " " + to_string(index) + ". " + user.getFullName() + "\n";
             index++;
         }
-        string input = getInput(usersList + "-----------------------------------------\n1 -> Добавить нового пользователя\n2 -> Удалить пользователя\n3 -> Результаты тестов всех пользователей\nN -> Выход\n-----------------------------------------\nДействие: ");
+        string input = getInput(usersList + "-----------------------------------------\n1 -> Р”РѕР±Р°РІРёС‚СЊ РЅРѕРІРѕРіРѕ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ\n2 -> РЈРґР°Р»РёС‚СЊ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ\n3 -> Р РµР·СѓР»СЊС‚Р°С‚С‹ С‚РµСЃС‚РѕРІ РІСЃРµС… РїРѕР»СЊР·РѕРІР°С‚РµР»РµР№\nN -> Р’С‹С…РѕРґ\n-----------------------------------------\nР”РµР№СЃС‚РІРёРµ: ");
         if (input == "1") {
             registrationMenu();
         }
         else if (input == "2") {
             int index;
-            cout << "Введите номер пользователя: ";
+            cout << "Р’РІРµРґРёС‚Рµ РЅРѕРјРµСЂ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ: ";
             cin >> index;
             cin.ignore();
             if (cin.fail() || index < 0 || index >= users.size())
@@ -330,10 +330,10 @@ void usersControlMenu() {
             for (User user : users) {
                 output += user.getFullName() + ":";
                 for (Result result : user.getResults()) {
-                    output += " " + result.getTestName() + ", результат " + to_string(result.getResult() * 100) + "%\n";
+                    output += " " + result.getTestName() + ", СЂРµР·СѓР»СЊС‚Р°С‚ " + to_string(result.getResult() * 100) + "%\n";
                 }
             }
-            getInput(output + "\nВведите любой символ для выхода\n");
+            getInput(output + "\nР’РІРµРґРёС‚Рµ Р»СЋР±РѕР№ СЃРёРјРІРѕР» РґР»СЏ РІС‹С…РѕРґР°\n");
         }
         else {
             return;
@@ -346,14 +346,14 @@ void adminMenu() {
     while (true) {
         system("cls");
         string input;
-        cout << "   -Меню Администратора-" << endl;
+        cout << "   -РњРµРЅСЋ РђРґРјРёРЅРёСЃС‚СЂР°С‚РѕСЂР°-" << endl;
         cout << "---------------------------" << endl;
-        cout << "1 -> Управление разделами" << endl;
-        cout << "2 -> Пользователи" << endl;
-        cout << "3 -> Сохранить" << endl;
-        cout << "N -> Выйти" << endl;
+        cout << "1 -> РЈРїСЂР°РІР»РµРЅРёРµ СЂР°Р·РґРµР»Р°РјРё" << endl;
+        cout << "2 -> РџРѕР»СЊР·РѕРІР°С‚РµР»Рё" << endl;
+        cout << "3 -> РЎРѕС…СЂР°РЅРёС‚СЊ" << endl;
+        cout << "N -> Р’С‹Р№С‚Рё" << endl;
         cout << "---------------------------" << endl;
-        cout << "Действие: "; getline(cin, input);
+        cout << "Р”РµР№СЃС‚РІРёРµ: "; getline(cin, input);
         if (input == "1") 
         {
             
@@ -361,35 +361,35 @@ void adminMenu() {
             {
                 system("cls");
                 string sectionsList;
-                cout << "   -Управление разделами-" << endl;
+                cout << "   -РЈРїСЂР°РІР»РµРЅРёРµ СЂР°Р·РґРµР»Р°РјРё-" << endl;
                 cout << "---------------------------" << endl;
-                sectionsList += " Список разделов: \n";
+                sectionsList += " РЎРїРёСЃРѕРє СЂР°Р·РґРµР»РѕРІ: \n";
                 for (Section section : sections) 
                 {
                     sectionsList += " " + section.getName() + "\tid: " + to_string(section.getId()) + "\n";
                 }
                 cout << sectionsList;
                 cout << "---------------------------" << endl;
-                cout << "1 -> Добавить новый раздел "<< endl;
-                cout << "2 -> Удалить раздел" << endl;
-                cout << "3 -> Управление разделом" << endl;
-                cout << "N -> Выход" << endl;
+                cout << "1 -> Р”РѕР±Р°РІРёС‚СЊ РЅРѕРІС‹Р№ СЂР°Р·РґРµР» "<< endl;
+                cout << "2 -> РЈРґР°Р»РёС‚СЊ СЂР°Р·РґРµР»" << endl;
+                cout << "3 -> РЈРїСЂР°РІР»РµРЅРёРµ СЂР°Р·РґРµР»РѕРј" << endl;
+                cout << "N -> Р’С‹С…РѕРґ" << endl;
                 cout << "---------------------------" << endl;
-                cout << "Действие: ";
+                cout << "Р”РµР№СЃС‚РІРёРµ: ";
                 input.clear();
                 getline(cin, input);
                 if (input == "1") 
                 {
-                    cout << "   -Добавление нового раздела-" << endl;
+                    cout << "   -Р”РѕР±Р°РІР»РµРЅРёРµ РЅРѕРІРѕРіРѕ СЂР°Р·РґРµР»Р°-" << endl;
                     cout << "---------------------------------" << endl;
-                    string name = getInput("Название нового раздела: ");
-                    cout << "ID нового раздела: ";
+                    string name = getInput("РќР°Р·РІР°РЅРёРµ РЅРѕРІРѕРіРѕ СЂР°Р·РґРµР»Р°: ");
+                    cout << "ID РЅРѕРІРѕРіРѕ СЂР°Р·РґРµР»Р°: ";
                     int id;
                     cin >> id;
                     cin.ignore();
                     if (cin.fail())
                     {
-                        cout << "ОШИБКА -- ВЫ ВВЕЛИ НЕ ЧИСЛОr" << endl;
+                        cout << "РћРЁРР‘РљРђ -- Р’Р« Р’Р’Р•Р›Р РќР• Р§РРЎР›Рћr" << endl;
                         cin.clear();
                         continue;
                     }
@@ -398,13 +398,13 @@ void adminMenu() {
                 }
                 else if (input == "2") 
                 {
-                    cout << "Введите id удаляемого раздела: " << endl;
+                    cout << "Р’РІРµРґРёС‚Рµ id СѓРґР°Р»СЏРµРјРѕРіРѕ СЂР°Р·РґРµР»Р°: " << endl;
                     int id;
                     cin >> id;
                     cin.ignore();
                     if (cin.fail())
                     {
-                        cout << "ОШИБКА -- ВЫ ВВЕЛИ НЕ ЧИСЛО" << endl;
+                        cout << "РћРЁРР‘РљРђ -- Р’Р« Р’Р’Р•Р›Р РќР• Р§РРЎР›Рћ" << endl;
                         cin.clear();
                         continue;
                     }
@@ -421,13 +421,13 @@ void adminMenu() {
                 }
                 else if (input == "3") 
                 {
-                    cout << "Введите id раздела: ";
+                    cout << "Р’РІРµРґРёС‚Рµ id СЂР°Р·РґРµР»Р°: ";
                     int id;
                     cin >> id;
                     cin.ignore();
                     if (cin.fail())
                     {
-                        cout << "ОШИБКА -- ВЫ ВВЕЛИ НЕ ЧИСЛО" << endl;
+                        cout << "РћРЁРР‘РљРђ -- Р’Р« Р’Р’Р•Р›Р РќР• Р§РРЎР›Рћ" << endl;
                         cin.clear();
                         continue;
                     }
@@ -470,7 +470,7 @@ Result testRun(Test test)
             system("cls");
             possibleAnswersList += " id " + to_string(answer.getId()) + "\t"+ answer.getTxt() + "\n";
         }
-        string input = getInput(question.getTitle()+ "\n------------------------------" + "\nВозможные варианты ответов:\n" + possibleAnswersList + "В качестве ответа, введите (id)\n------------------------------\n id: ");
+        string input = getInput(question.getTitle()+ "\n------------------------------" + "\nР’РѕР·РјРѕР¶РЅС‹Рµ РІР°СЂРёР°РЅС‚С‹ РѕС‚РІРµС‚РѕРІ:\n" + possibleAnswersList + "Р’ РєР°С‡РµСЃС‚РІРµ РѕС‚РІРµС‚Р°, РІРІРµРґРёС‚Рµ (id)\n------------------------------\n id: ");
         for (Answer answer : question.getPossibleAnswers()) {
             if (answer.checkIsCorrectAnswer() && to_string(answer.getId()) == input) 
             {
@@ -491,15 +491,15 @@ void userMenu(User* currentUser)
     while (true) 
     {
         system("cls");
-        cout << "   -Программа тестирования-" << endl;
+        cout << "   -РџСЂРѕРіСЂР°РјРјР° С‚РµСЃС‚РёСЂРѕРІР°РЅРёСЏ-" << endl;
         cout << "------------------------------" << endl;
-        string input = getInput("1 -> Пройти тестирование\n2 -> Мои результаты\n3 -> Персональные данные\nN -> Выход\n------------------------------\nДействие: ");
+        string input = getInput("1 -> РџСЂРѕР№С‚Рё С‚РµСЃС‚РёСЂРѕРІР°РЅРёРµ\n2 -> РњРѕРё СЂРµР·СѓР»СЊС‚Р°С‚С‹\n3 -> РџРµСЂСЃРѕРЅР°Р»СЊРЅС‹Рµ РґР°РЅРЅС‹Рµ\nN -> Р’С‹С…РѕРґ\n------------------------------\nР”РµР№СЃС‚РІРёРµ: ");
         if (input == "1") 
         {
             system("cls");
             string sectionsList;
-            sectionsList += " Список разделов:\n";
-            cout << "\t-Тестирование-" << endl;
+            sectionsList += " РЎРїРёСЃРѕРє СЂР°Р·РґРµР»РѕРІ:\n";
+            cout << "\t-РўРµСЃС‚РёСЂРѕРІР°РЅРёРµ-" << endl;
             cout << "------------------------------" << endl;
             for (Section section : sections)
                 {
@@ -509,16 +509,16 @@ void userMenu(User* currentUser)
             for (Section section : sections) 
             {
                 system("cls");
-                string input2 = getInput("Выберите раздел (id)\n" + sectionsList + " N -> Выход\n------------------------------\n id: ");
+                string input2 = getInput("Р’С‹Р±РµСЂРёС‚Рµ СЂР°Р·РґРµР» (id)\n" + sectionsList + " N -> Р’С‹С…РѕРґ\n------------------------------\n id: ");
                 bool flag = false;
                 if (to_string(section.getId()) == input2) 
                 {
-                    string testsList = " Список доступных тестов:\n";
+                    string testsList = " РЎРїРёСЃРѕРє РґРѕСЃС‚СѓРїРЅС‹С… С‚РµСЃС‚РѕРІ:\n";
                     for (Test test : section.getTests())
                     {
                         testsList += " " + test.getName() + " id: " + to_string(test.getId()) + "\n";
                     }
-                    input2 = getInput("------------------------------\nВыберите тест (id)\n------------------------------\n" + testsList + "------------------------------\n id: ");
+                    input2 = getInput("------------------------------\nР’С‹Р±РµСЂРёС‚Рµ С‚РµСЃС‚ (id)\n------------------------------\n" + testsList + "------------------------------\n id: ");
                     for (Test test : section.getTests()) 
                     {
                         if (to_string(test.getId()) == input2) 
@@ -530,7 +530,7 @@ void userMenu(User* currentUser)
                             }
                             else 
                             {
-                                cout << "Вы уже проходили данный тест!" << endl;
+                                cout << "Р’С‹ СѓР¶Рµ РїСЂРѕС…РѕРґРёР»Рё РґР°РЅРЅС‹Р№ С‚РµСЃС‚!" << endl;
                                 system("pause");
                              
                             }
@@ -547,7 +547,7 @@ void userMenu(User* currentUser)
             string resultsList;
             for (Result result : currentUser->getResults()) 
             {
-                resultsList += " -" + result.getTestName() + "-\t|результат| = " + to_string(result.getResult()) + "%\n";
+                resultsList += " -" + result.getTestName() + "-\t|СЂРµР·СѓР»СЊС‚Р°С‚| = " + to_string(result.getResult()) + "%\n";
             }
             cout << resultsList << "------------------------------" << endl;
             system("pause");
@@ -569,10 +569,10 @@ void loginMenu()
     while (true) 
     {
         system("cls");
-        cout << "   |-Вход-|" << endl;
+        cout << "   |-Р’С…РѕРґ-|" << endl;
         cout << "--------------" << endl;
-        string username = getInput("Логин : ");
-        string password = getInput("Пароль: ");
+        string username = getInput("Р›РѕРіРёРЅ : ");
+        string password = getInput("РџР°СЂРѕР»СЊ: ");
         bool flag = true;
         for (User& user : users) 
         {
@@ -592,8 +592,8 @@ void loginMenu()
         }
         if (flag) 
         {
-        cout << "Неверный логин или пароль!" << endl;
-        cout << "Возможно учетной записи не существует!" << endl;
+        cout << "РќРµРІРµСЂРЅС‹Р№ Р»РѕРіРёРЅ РёР»Рё РїР°СЂРѕР»СЊ!" << endl;
+        cout << "Р’РѕР·РјРѕР¶РЅРѕ СѓС‡РµС‚РЅРѕР№ Р·Р°РїРёСЃРё РЅРµ СЃСѓС‰РµСЃС‚РІСѓРµС‚!" << endl;
         system("pause");
         }
         return;

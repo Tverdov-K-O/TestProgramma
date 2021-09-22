@@ -1,4 +1,4 @@
-#include <iostream>
+п»ї#include <iostream>
 #include <string>
 #include <vector>
 #include <fstream>
@@ -27,13 +27,13 @@ int main() {
         while (true) {
             system("cls");
             int input;
-            cout << "     |-Меню-|" << endl;
+            cout << "     |-РњРµРЅСЋ-|" << endl;
             cout << "------------------" << endl;
-            cout << " 1 -> Вход" << endl;
-            cout << " 2 -> Регистрация" << endl;
-            cout << " 3 -> Выход" << endl;
+            cout << " 1 -> Р’С…РѕРґ" << endl;
+            cout << " 2 -> Р РµРіРёСЃС‚СЂР°С†РёСЏ" << endl;
+            cout << " 3 -> Р’С‹С…РѕРґ" << endl;
             cout << "------------------" << endl;
-            cout << "Действие: "; cin >> input;
+            cout << "Р”РµР№СЃС‚РІРёРµ: "; cin >> input;
             switch (input)
             {
             default: break;
@@ -44,7 +44,7 @@ int main() {
         }
 
 
-        //string input = getInput("1. Войти\n2. Регистрация\n");
+        //string input = getInput("1. Р’РѕР№С‚Рё\n2. Р РµРіРёСЃС‚СЂР°С†РёСЏ\n");
 
     
 
